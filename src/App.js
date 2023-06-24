@@ -1,7 +1,21 @@
 import logo from './logo.svg';
+import { auth } from './firebase-config.js';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import './App.css';
 
 function App() {
+
+  const authFunction = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((res) => {
+        console.log('res', res);
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +23,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={authFunction}>Google-Auth</button>
       </header>
     </div>
   );
